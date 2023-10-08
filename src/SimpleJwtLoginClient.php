@@ -66,13 +66,17 @@ class SimpleJwtLoginClient
      * @param null|string $authCode
      * @return array<string,mixed>|null
      */
-    public function registerUser($email, $password, $authCode = null)
+    public function registerUser($email, $password, $authCode = null, $jwt = null)
     {
         $params = [
             'email' => $email,
             'password' => $password,
         ];
 
+        if (is_string($jwt)) {
+            $params['JWT'] = $jwt;
+        }        
+        
         if (is_string($authCode)) {
             $params['AUTH_KEY'] = $authCode;
         }
